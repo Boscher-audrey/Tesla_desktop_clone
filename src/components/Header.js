@@ -12,20 +12,29 @@ function Header() {
   return (
     <Container>
       <a>
-        <img src="/images/logo.svg" alt="tesla logo" />
+        <HeaderLogo src="/images/logo.svg" alt="tesla logo" />
       </a>
       <Menu>
         {cars &&
           cars.map((car, index) => (
             <a key={index} href="#">
-              {car}
+              <span>{car}</span>
             </a>
           ))}
       </Menu>
       <RightMenu>
-        <a href="#">Shop</a>
-        <a href="#">Tesla account</a>
-        <CustomMenu onClick={() => setBurgerStatus(true)} />
+        <a href="#">
+          <span>Shop</span>
+        </a>
+        <a href="#">
+          <span>Account</span>
+        </a>
+        <CustomMenuMobile onClick={() => setBurgerStatus(true)} />
+        <CustomMenuDesktop onClick={() => setBurgerStatus(true)}>
+          <a href="#">
+            <span>Menu</span>
+          </a>
+        </CustomMenuDesktop>
       </RightMenu>
       <BurgerNav show={burgerStatus}>
         <CloseWrapper>
@@ -65,7 +74,7 @@ const Container = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0 20px;
+  padding: 0 50px;
   top: 0;
   left: 0;
   right: 0;
@@ -79,10 +88,21 @@ const Menu = styled.div`
   justify-content: center;
 
   a {
-    font-weight: 600;
-    text-transform: uppercase;
-    padding: 0 10px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    border-radius: 100px;
+    font-weight: 500;
+    padding: 0 8px;
     flex-wrap: nowrap;
+    &:hover {
+      background-color: rgba(255, 255, 255, 0.2);
+      transition: background-color 0.33s ease;
+    }
+
+    span {
+      margin: 0 8px;
+    }
   }
 
   @media (max-width: 768px) {
@@ -90,19 +110,22 @@ const Menu = styled.div`
   }
 `
 
-const RightMenu = styled.div`
-  display: flex;
-  align-items: center;
+const RightMenu = styled(Menu)`
+  flex: none;
+`
 
-  a {
-    font-weight: 600;
-    text-transform: uppercase;
-    margin-right: 10px;
+const CustomMenuMobile = styled(MenuIcon)`
+  cursor: pointer;
+  @media (min-width: 768px) {
+    display: none !important;
   }
 `
 
-const CustomMenu = styled(MenuIcon)`
+const CustomMenuDesktop = styled.div`
   cursor: pointer;
+  @media (max-width: 768px) {
+    display: none !important;
+  }
 `
 
 const BurgerNav = styled.div`
@@ -138,4 +161,9 @@ const CustomClose = styled(CloseIcon)`
 const CloseWrapper = styled.div`
   display: flex;
   justify-content: flex-end;
+`
+
+const HeaderLogo = styled.img`
+  width: 120px;
+  height: 12px;
 `

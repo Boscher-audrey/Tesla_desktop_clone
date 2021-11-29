@@ -8,13 +8,16 @@ function Section({
   backgroundImg,
   leftBtnText,
   rightBtnText,
+  descriptionLink,
 }) {
   return (
     <Wrap bgImage={backgroundImg}>
       <Fade bottom>
         <ItemText>
           <h1>{title}</h1>
-          <p>{description}</p>
+          <p>
+            {description} <a href="#">{descriptionLink}</a>
+          </p>
         </ItemText>
       </Fade>
       <Buttons>
@@ -43,11 +46,21 @@ const Wrap = styled.div`
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
+  scroll-snap-align: start;
 `
 
 const ItemText = styled.div`
   padding-top: 15vh;
   text-align: center;
+
+  h1 {
+    font-weight: 500;
+    font-size: 40px;
+  }
+
+  a {
+    text-decoration: underline;
+  }
 `
 
 const ButtonGroup = styled.div`
